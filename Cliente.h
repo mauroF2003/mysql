@@ -6,15 +6,15 @@
 #include <string>
 
 using namespace std;
-class Cliente : Persona{
+class Cliente : Persona {
 	//atributos
-	private: string nit;
-	//constructor
-	public: 
+private: string nit;
+	   //constructor
+public:
 	Cliente() {
 	}
-	Cliente(string nom,string ape, string dir, int tel,	string date, string n): Persona(nom,ape,dir,tel,date){
-		nit = n; 
+	Cliente(string nom, string ape, string dir, int tel, string date, string n) : Persona(nom, ape, dir, tel, date) {
+		nit = n;
 	};
 	//Metodos
 	//set (modificar)
@@ -30,16 +30,16 @@ class Cliente : Persona{
 	string getApellidos() { return apellidos; }
 	string getDireccion() { return direccion; }
 	int getTelefono() { return telefono; }
-	
+
 	//metodo
 	void crear() {
 		int q_estado;
 		ConexionBD cn = ConexionBD();
 		cn.abrir_conexion();
 		if (cn.getConectar()) {
-			
+
 			string t = to_string(telefono);
-			string insert = "INSERT INTO CLIENTES(nit,nombres,apellidos,direccion,telefono,fecha_nacimiento) VALUES('"+nit+"','"+nombres+"','"+apellidos+"','"+direccion+"','"+t+"','" + fecha_nacimiento + "')";
+			string insert = "INSERT INTO CLIENTES(nit,nombres,apellidos,direccion,telefono,fecha_nacimiento) VALUES('" + nit + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + t + "','" + fecha_nacimiento + "')";
 			const char* i = insert.c_str();
 			q_estado = mysql_query(cn.getConectar(), i);
 			if (!q_estado) {
@@ -52,7 +52,7 @@ class Cliente : Persona{
 			}
 		}
 		else {
-			cout << "Error al conectar"<<endl;
+			cout << "Error al conectar" << endl;
 		}
 		cn.cerrar_conexion();
 	}
@@ -75,7 +75,7 @@ class Cliente : Persona{
 					cout << "apellidos: " << fila[3] << endl;
 					cout << "direccion: " << fila[4] << endl;
 					cout << "telefono :" << fila[5] << endl;
-					cout << "fecha_nacimiento: " << fila[6] << endl; 
+					cout << "fecha_nacimiento: " << fila[6] << endl;
 					cout << "\n";
 				}
 				cout << "\n";
